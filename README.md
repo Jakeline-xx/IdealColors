@@ -100,13 +100,13 @@ A API de Coloração Pessoal "Ideal Color" fornece um conjunto de classes para a
 ```
 
 | campo              | tipo          | obrigatório | descrição                                                            |
-| ------------------ | ------------- | ----------- | -------------------------------------------------------------------- | --- |
+| ------------------ | ------------- | ----------- | -------------------------------------------------------------------- | 
 | idColoracaoPessoal | Long          | sim         | é o identificador unico de uma coloração pessoal                     |
 | idCartelaDeCores   | Long          | sim         | identificador estrangeiro que faz referencia a classe CartelaDeCores |
 | tomDePele          | String        | sim         | tom de pele relacionado a coloração pessoal cadastrada               |
 | subtomDePele       | String        | sim         | subtom de pele relacionado a coloração pessoal cadastrada            |
 | corDosOlhos        | String        | sim         | cor dos olhos relacionado a coloração pessoal cadastrada             |
-| corDoCabelo        | String        | sim         | cor do cabelo relacionado a coloração pessoal cadastrada             |     |
+| corDoCabelo        | String        | sim         | cor do cabelo relacionado a coloração pessoal cadastrada             |     
 | dataCadastro       | LocalDateTime | sim         | data em que foi cadastrada a coloração pessoal                       |
 
 **Exemplo do corpo de Request**
