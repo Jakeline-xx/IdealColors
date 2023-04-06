@@ -2,7 +2,7 @@
 # Ideal Colors
 
 Projeto referente a Challenge 2023 com empresa parceira PlusSoft. 
-A API de Coloração Pessoal "Ideal Color" fornece um conjunto de classes para ajudar os usuários a identificar as cores que melhor se adequam à sua aparência pessoal.
+A API de Coloração Pessoal "Ideal Colors" fornece um conjunto de classes para ajudar os usuários a identificar as cores que melhor se adequam à sua aparência pessoal.
 
 ## Endpoints
 
