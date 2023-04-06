@@ -2,7 +2,7 @@
 # Ideal Colors
 
 Projeto referente a Challenge 2023 com empresa parceira PlusSoft. 
-A API de Coloração Pessoal "Ideal Colors" fornece um conjunto de classes para ajudar os usuários a identificar as cores que melhor se adequam à sua aparência pessoal.
+A API de Coloração Pessoal "Ideal Color" fornece um conjunto de classes para ajudar os usuários a identificar as cores que melhor se adequam à sua aparência pessoal.
 
 ## Endpoints
 
@@ -386,4 +386,179 @@ A API de Coloração Pessoal "Ideal Colors" fornece um conjunto de classes para 
 | código | descrição
 |-|-
 | 200 | cartela de cores atualizada com sucesso
-| 400 | não foi encontrada cartela de cores com id informado
+| 400 | não foi encontrada cartela de cores com id informado## Endpoints
+
+- Produto
+    - Obter detalhes do produto a partir do id
+    - Listar todos os produtos cadastrados
+    - Cadastrar novo produto
+    - Apagar produto
+    - Atualizar produto
+
+    
+
+#### Obtém produto a partir do id informado
+
+```http
+  GET /idealcolors/api/produto/{id}
+```
+**Exemplo do corpo de Response**
+
+```js
+{
+    "idProduto": 333,
+    "idCartelaDeCores": 998,
+    "descricaoProduto": "Camisa Feminina Alongada Verde Pool by Riachuelo",
+    "categoria": "vestuario",
+    "marca":"Riachuelo",
+    "preco":119.90,
+    "qtdDisponivel":203,
+    "dataCadastro":"2023-03-06"
+}
+```
+
+**Código de Resposta**
+| código | descrição
+|-|-
+| 200 | dados retornados com sucesso no corpo da resposta
+| 400 | não foi encontrado produto com id informado
+
+
+
+
+#### Lista todos os produtos cadastrados
+
+```http
+  GET /idealcolors/api/produtos/listar/
+```
+**Exemplo do corpo de Response**
+
+```js
+
+[
+    {
+        "idProduto": 333,
+        "idCartelaDeCores": 998,
+        "descricaoProduto": "Camisa Feminina Alongada Verde Pool by Riachuelo",
+        "categoria": "vestuario",
+        "marca":"Riachuelo",
+        "preco":119.90,
+        "qtdDisponivel":203,
+        "dataCadastro":"2023-03-06"
+    },
+    {
+        "idProduto": 334,
+        "idCartelaDeCores": 995,
+        "descricaoProduto": "Calça alfaiataria feminina com cinto bege AK by Riachuelo",
+        "categoria": "vestuario",
+        "marca":"Riachuelo",
+        "preco":159.90,
+        "qtdDisponivel":7,
+        "dataCadastro":"2023-03-06"
+    },
+        {
+        "idProduto": 335,
+        "idCartelaDeCores": 994,
+        "descricaoProduto": "Saída de praia vestido longo folhagens bege Dript by Riachuelo",
+        "categoria": "moda praia",
+        "marca":"Riachuelo",
+        "preco":79.90,
+        "qtdDisponivel":13,
+        "dataCadastro":"2023-03-06"
+    }
+]
+```
+
+**Código de Resposta**
+| código | descrição
+|-|-
+| 200 | dados retornados com sucesso no corpo da resposta
+| 400 | não foi encontrado nenhum produto cadastrado
+
+#### Cadastra novo produto a partir dos dados informados
+
+```http
+  POST /idealcolors/api/produto/cadastrar
+```
+
+| campo                 | tipo           | obrigatório | descrição                                                                     |
+| --------------------- | -------------- | ----------- | ----------------------------------------------------------------------------- |
+| idProduto                    | Long            | sim         | é o identificador unico de um produto                                       |
+| idCartelaDeCores            | Long         | não         | identificador estrangeiro que faz referencia a classe CartelaDeCores
+| descricaoProduto               | String         | sim         | descricao do produto                                       |
+| categoria           | String           | sim         | categoria que se encontra o produto cadastrado                                           |
+| marca            | String           | sim         | marca do produto cadastrado                                                     |
+| preco               | Double           | sim         | valor em reais do produto cadastrado                                                        |        
+qtdDisponivel               | Long           | sim         | quantidade do produto disponível em estoque
+| dataCadastro           | LocalDateTime        | sim         | data em que foi cadastrado o produto                                   
+
+**Exemplo do corpo de Request**
+
+```js
+    {
+        "idProduto": 333,
+        "idCartelaDeCores": 998,
+        "descricaoProduto": "Camisa Feminina Alongada Verde Pool by Riachuelo",
+        "categoria": "vestuario",
+        "marca":"Riachuelo",
+        "preco":119.90,
+        "qtdDisponivel":203,
+        "dataCadastro":"2023-03-06"
+    },
+```
+
+**Código de Resposta**
+| código | descrição
+|-|-
+| 200 | produto cadastrado com sucesso
+| 400 | erro na validação dos dados da requisição
+
+#### Apaga produto a partir do id informado
+
+```http
+  DELETE idealcolors/api/produto/apagar/{idProduto}
+```
+
+**Exemplo do corpo de Request**
+
+```js
+{
+    "idProduto": 333,
+}
+```
+
+**Código de Resposta**
+| código | descrição
+|-|-
+| 200 | produto deletado com sucesso
+| 400 | não foi encontrado produto com id informado
+
+#### Atualiza produto a partir dos dados informados 
+
+```http
+  PUT idealcolors/api/produto/atualizar
+```
+
+**Exemplo do corpo de Request**
+
+#### Alguns campos não podem ser alterados pelo usuário, como a dataCadastro e o idProduto.
+
+```js
+    {
+        "idProduto": 333,
+        "idCartelaDeCores": 998,
+        "descricaoProduto": "Camisa Feminina Alongada Verde Pool by Riachuelo",
+        "categoria": "vestuario",
+        "marca":"Riachuelo",
+        "preco":119.90,
+        "qtdDisponivel":202,
+        "dataCadastro":"2023-03-06"
+    },
+```
+
+**Código de Resposta**
+| código | descrição
+|-|-
+| 200 | produto atualizado com sucesso
+| 400 | não foi encontrado produto com id informado
+
