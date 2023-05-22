@@ -1,25 +1,18 @@
 package com.projeto.idealcolors.controller;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.projeto.idealcolors.exception.RestNotFoundException;
 import com.projeto.idealcolors.model.ColoracaoPessoal;
 import com.projeto.idealcolors.repository.CartelaDeCoresRepository;
 import com.projeto.idealcolors.repository.ColoracaoPessoalRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.data.web.PagedResourcesAssembler;
 import org.springframework.hateoas.EntityModel;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
 import jakarta.validation.Valid;
@@ -29,13 +22,18 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @RequestMapping("/idealcolors/api/coloracaopessoal")
 public class ColoracaoPessoalController {
-    List<ColoracaoPessoal> coloracoesPessoais = new ArrayList<>();
     @Autowired
     ColoracaoPessoalRepository coloracaoPessoalRepository;
     @Autowired
     CartelaDeCoresRepository cartelaDeCoresRepository;
     @Autowired
     PagedResourcesAssembler<Object> assembler;
+
+    @GetMapping
+    public Page<ColoracaoPessoal> index(@RequestParam(required = false) String corDosOlhos, @PageableDefault(size = 10) Pageable pageable){
+        if (corDosOlhos == null) return coloracaoPessoalRepository.findAll(pageable);
+        return coloracaoPessoalRepository.findByEyeColorContaining(corDosOlhos, pageable);
+    }
 
     @GetMapping("{id}")
     public EntityModel<ColoracaoPessoal> show(@PathVariable Long id){
