@@ -1,6 +1,8 @@
 package com.projeto.idealcolors.controller;
 
 import com.projeto.idealcolors.exception.RestNotFoundException;
+import com.projeto.idealcolors.model.ColoracaoPessoal;
+import com.projeto.idealcolors.model.Produto;
 import com.projeto.idealcolors.repository.*;
 import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
@@ -15,6 +17,9 @@ import org.springframework.web.server.ResponseStatusException;
 import com.projeto.idealcolors.model.CartelaDeCores;
 import com.projeto.idealcolors.repository.CartelaDeCoresRepository;
 import com.projeto.idealcolors.repository.ColoracaoPessoalRepository;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @RestController
 @Slf4j
@@ -43,8 +48,19 @@ public class CartelaDeCoresController {
     public ResponseEntity<Object> create(@RequestBody @Valid CartelaDeCores cartelaDeCores){
         log.info("cadastrando cartela de cores: " + cartelaDeCores);
         cartelaDeCoresRepository.save(cartelaDeCores);
-        cartelaDeCores.setColoracoesPessoais(coloracaoPessoalRepository.findById(cartelaDeCores.getColoracoesPessoais().getIdColoracaoPessoal()).get());
-        cartelaDeCores.setProdutos(produtoRepository.findById(cartelaDeCores.getProdutos().getIdProdutos()).get());
+
+        List<ColoracaoPessoal> coloracoesPessoais = new ArrayList<>();
+        for (ColoracaoPessoal coloracaoPessoal : cartelaDeCores.getColoracoesPessoais()) {
+            coloracoesPessoais.add(coloracaoPessoalRepository.findById(coloracaoPessoal.getIdColoracaoPessoal()).orElse(null));
+        }
+        cartelaDeCores.setColoracoesPessoais(coloracoesPessoais);
+
+        List<Produto> produtos = new ArrayList<>();
+        for (Produto produto : cartelaDeCores.getProdutos()) {
+            produtos.add(produtoRepository.findById(produto.getIdProduto()).orElse(null));
+        }
+        cartelaDeCores.setProdutos(produtos);
+
         return ResponseEntity
                 .created(cartelaDeCores.toModel().getRequiredLink("self").toUri())
                 .body(cartelaDeCores.toModel());

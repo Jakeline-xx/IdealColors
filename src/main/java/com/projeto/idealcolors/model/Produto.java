@@ -2,13 +2,18 @@ package com.projeto.idealcolors.model;
 
 import javax.validation.constraints.NotEmpty;
 
+import com.projeto.idealcolors.controller.ProdutoController;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.hateoas.EntityModel;
 
 import java.time.LocalDateTime;
+
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
 @Data
 @NoArgsConstructor
@@ -46,4 +51,12 @@ public class Produto {
 
     @Column(name = "data_cadastro")
     private LocalDateTime dataCadastro;
+
+    public EntityModel<Produto> toModel() {
+        return EntityModel.of(
+                this,
+                linkTo(methodOn(ProdutoController.class).show(idProduto)).withSelfRel(),
+                linkTo(methodOn(ProdutoController.class).destroy(idProduto)).withRel("delete")
+        );
+    }
 }

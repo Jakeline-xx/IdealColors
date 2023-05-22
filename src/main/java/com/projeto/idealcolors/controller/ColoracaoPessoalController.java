@@ -32,7 +32,7 @@ public class ColoracaoPessoalController {
     @GetMapping
     public Page<ColoracaoPessoal> index(@RequestParam(required = false) String corDosOlhos, @PageableDefault(size = 10) Pageable pageable){
         if (corDosOlhos == null) return coloracaoPessoalRepository.findAll(pageable);
-        return coloracaoPessoalRepository.findByEyeColorContaining(corDosOlhos, pageable);
+        return coloracaoPessoalRepository.findByCorDosOlhosContaining(corDosOlhos, pageable);
     }
 
     @GetMapping("{id}")

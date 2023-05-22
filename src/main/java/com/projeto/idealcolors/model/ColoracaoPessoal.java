@@ -3,7 +3,6 @@ package com.projeto.idealcolors.model;
 import java.time.LocalDateTime;
 import javax.validation.constraints.NotEmpty;
 
-import com.projeto.idealcolors.controller.CartelaDeCoresController;
 import com.projeto.idealcolors.controller.ColoracaoPessoalController;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -49,12 +48,11 @@ public class ColoracaoPessoal {
     @Column(name = "data_cadastro")
     private LocalDateTime dataCadastro;
 
-//    public EntityModel<ColoracaoPessoal> toModel(){
-//        return EntityModel.of(
-//                this,
-//                linkTo(methodOn(ColoracaoPessoalController.class).show(idColoracaoPessoal)).withSelfRel(),
-//                linkTo(methodOn(ColoracaoPessoalController.class).destroy(idColoracaoPessoal).withRel("delete"),
-//                linkTo(methodOn(CartelaDeCoresController.class).show(this.getCartelaDeCores().getIdCartelaDeCores())).withRel("cartelaDeCores")
-//        );
-//    }
+    public EntityModel<ColoracaoPessoal> toModel() {
+        return EntityModel.of(
+                this,
+                linkTo(methodOn(ColoracaoPessoalController.class).show(idColoracaoPessoal)).withSelfRel(),
+                linkTo(methodOn(ColoracaoPessoalController.class).destroy(idColoracaoPessoal)).withRel("delete")
+        );
+    }
 }
