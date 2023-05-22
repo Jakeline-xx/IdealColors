@@ -4,6 +4,10 @@
 Projeto referente a Challenge 2023 com empresa parceira PlusSoft. 
 A API de Coloração Pessoal "Ideal Color" fornece um conjunto de classes para ajudar os usuários a identificar as cores que melhor se adequam à sua aparência pessoal.
 
+## Arquitetura do Projeto
+
+Está no arquivo "arquitetura.jpeg"
+
 ## Endpoints
 
 - Coloração Pessoal
@@ -41,62 +45,6 @@ A API de Coloração Pessoal "Ideal Color" fornece um conjunto de classes para a
 | 400 | não foi encontrada coloracao pessoal com id informado
 
 
-
-
-#### Lista todos os modelos de colorações pessoais cadastrados
-
-```http
-  GET /idealcolors/api/coloracoespessoais/listar/
-```
-**Exemplo do corpo de Response**
-
-```js
-
-[
-  {
-    "idColoracaoPessoal": 123,
-    "idCartelaDeCores": 998,
-    "tomDePele": "branca",
-    "subtomDePele":"frio",
-    "corDosOlhos":"castanho",
-    "corDoCabelo":"loiro",
-    "dataCadastro":"2023-03-06"
-  },
-  {
-    "idColoracaoPessoal": 124,
-    "idCartelaDeCores": 999,
-    "tomDePele": "negra",
-    "subtomDePele":"neutro",
-    "corDosOlhos":"azul",
-    "corDoCabelo":"castranho claro",
-    "dataCadastro":"2023-03-06"
-  },
-  {
-    "idColoracaoPessoal": 125,
-    "idCartelaDeCores": 997,
-    "tomDePele": "morena escura",
-    "subtomDePele":"oliva",
-    "corDosOlhos":"castanho escuro",
-    "corDoCabelo":"loiro",
-    "dataCadastro":"2023-03-06"
-  },
-  {
-    "idColoracaoPessoal": 126,
-    "idCartelaDeCores": 996,
-    "tomDePele": "negra",
-    "subtomDePele":"frio",
-    "corDosOlhos":"verde",
-    "corDoCabelo":"preto",
-    "dataCadastro":"2023-03-06"
-  }
-]
-```
-
-**Código de Resposta**
-| código | descrição
-|-|-
-| 200 | dados retornados com sucesso no corpo da resposta
-| 400 | não foi encontrada nenhuma coloracao pessoal cadastrada
 
 #### Cadastra nova coloração pessoal a partir dos dados informados
 
@@ -221,80 +169,6 @@ A API de Coloração Pessoal "Ideal Color" fornece um conjunto de classes para a
 | 200 | dados retornados com sucesso no corpo da resposta
 | 400 | não foi encontrada cartela de cores com id informado
 
-#### Lista todas as cartela de cores cadastradas
-
-```http
-  GET /idealcolors/api/cartelasdecores/listar/
-```
-**Exemplo do corpo de Response**
-
-```js
-
-[
-    {
-        "idCartelaDeCores": 123,
-        "idColoracaoPessoal": 998,
-        "idProduto": 233,
-        "coresCartela": [
-            "azul",
-            "amarelo",
-            "roxo",
-            "cinza",
-            "preto",
-            "branco"
-        ],
-        "dataCadastro":"2023-03-06"
-    },
-    {
-        "idCartelaDeCores": 124,
-        "idColoracaoPessoal": 997,
-        "idProduto": 237,
-        "coresCartela": [
-            "verde",
-            "vermelho",
-            "roxo",
-            "cinza",
-            "chumbo",
-            "branco"
-        ],
-        "dataCadastro":"2023-03-06"
-    },
-    {
-        "idCartelaDeCores": 125,
-        "idColoracaoPessoal": 995,
-        "idProduto": 235,
-        "coresCartela": [
-            "azul",
-            "amarelo",
-            "roxo",
-            "cinza",
-            "laranja",
-            "branco"
-        ],
-        "dataCadastro":"2023-03-06"
-    },
-    {
-        "idCartelaDeCores": 126,
-        "idColoracaoPessoal": 948,
-        "idProduto": 243,
-        "coresCartela": [
-            "lilas",
-            "amarelo",
-            "roxo",
-            "cinza",
-            "preto",
-            "marrom"
-        ],
-        "dataCadastro":"2023-03-06"
-    }
-]
-```
-
-**Código de Resposta**
-| código | descrição
-|-|-
-| 200 | dados retornados com sucesso no corpo da resposta
-| 400 | não foi encontrada nenhuma cartela de cores cadastrada
 
 #### Cadastra nova cartela de cores a partir dos dados informados
 
@@ -423,57 +297,6 @@ A API de Coloração Pessoal "Ideal Color" fornece um conjunto de classes para a
 | 200 | dados retornados com sucesso no corpo da resposta
 | 400 | não foi encontrado produto com id informado
 
-
-
-
-#### Lista todos os produtos cadastrados
-
-```http
-  GET /idealcolors/api/produtos/listar/
-```
-**Exemplo do corpo de Response**
-
-```js
-
-[
-    {
-        "idProduto": 333,
-        "idCartelaDeCores": 998,
-        "descricaoProduto": "Camisa Feminina Alongada Verde Pool by Riachuelo",
-        "categoria": "vestuario",
-        "marca":"Riachuelo",
-        "preco":119.90,
-        "qtdDisponivel":203,
-        "dataCadastro":"2023-03-06"
-    },
-    {
-        "idProduto": 334,
-        "idCartelaDeCores": 995,
-        "descricaoProduto": "Calça alfaiataria feminina com cinto bege AK by Riachuelo",
-        "categoria": "vestuario",
-        "marca":"Riachuelo",
-        "preco":159.90,
-        "qtdDisponivel":7,
-        "dataCadastro":"2023-03-06"
-    },
-        {
-        "idProduto": 335,
-        "idCartelaDeCores": 994,
-        "descricaoProduto": "Saída de praia vestido longo folhagens bege Dript by Riachuelo",
-        "categoria": "moda praia",
-        "marca":"Riachuelo",
-        "preco":79.90,
-        "qtdDisponivel":13,
-        "dataCadastro":"2023-03-06"
-    }
-]
-```
-
-**Código de Resposta**
-| código | descrição
-|-|-
-| 200 | dados retornados com sucesso no corpo da resposta
-| 400 | não foi encontrado nenhum produto cadastrado
 
 #### Cadastra novo produto a partir dos dados informados
 
