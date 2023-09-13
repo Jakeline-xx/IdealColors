@@ -37,12 +37,18 @@ public class ProdutoController {
 
     @PostMapping
     public ResponseEntity<Object> create(@RequestBody @Valid Produto produto){
-        log.info("cadastrando produto: " + produto);
+        log.info("Cadastrando produto: " + produto);
         produtoRepository.save(produto);
-        produto.setCartelaDeCores(cartelaDeCoresRepository.findById(produto.getCartelaDeCores().getIdCartelaDeCores()).get());
+
         return ResponseEntity
                 .created(produto.toModel().getRequiredLink("self").toUri())
                 .body(produto.toModel());
+//        log.info("cadastrando produto: " + produto);
+//        produtoRepository.save(produto);
+//        produto.setCartelaDeCores(cartelaDeCoresRepository.findById(produto.getCartelaDeCores().getIdCartelaDeCores()).get());
+//        return ResponseEntity
+//                .created(produto.toModel().getRequiredLink("self").toUri())
+//                .body(produto.toModel());
     }
 
     @DeleteMapping("{id}")
