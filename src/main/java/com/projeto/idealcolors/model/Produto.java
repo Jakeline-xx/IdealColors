@@ -49,9 +49,6 @@ public class Produto {
     @Column(name = "qtd_disponivel")
     private Long qtdDisponivel;
 
-    @Column(name = "data_cadastro")
-    private LocalDateTime dataCadastro;
-
     public EntityModel<Produto> toModel() {
         return EntityModel.of(
                 this,

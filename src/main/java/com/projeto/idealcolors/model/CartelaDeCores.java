@@ -35,10 +35,7 @@ public class CartelaDeCores {
 
     @NotEmpty(message = "A lista de cores da cartela é obrigatória")
     @Column(name = "cores_cartela")
-    private List<String> coresCartela;
-
-    @Column(name = "data_cadastro")
-    private LocalDateTime dataCadastro;
+    private String coresCartela;
 
     public EntityModel<CartelaDeCores> toModel() {
         return EntityModel.of(

@@ -45,9 +45,6 @@ public class ColoracaoPessoal {
     @JoinColumn(name = "id_cartela_cores")
     private CartelaDeCores cartelaDeCores;
 
-    @Column(name = "data_cadastro")
-    private LocalDateTime dataCadastro;
-
     public EntityModel<ColoracaoPessoal> toModel() {
         return EntityModel.of(
                 this,
