@@ -49,18 +49,6 @@ public class CartelaDeCoresController {
         log.info("cadastrando cartela de cores: " + cartelaDeCores);
         cartelaDeCoresRepository.save(cartelaDeCores);
 
-        List<ColoracaoPessoal> coloracoesPessoais = new ArrayList<>();
-        for (ColoracaoPessoal coloracaoPessoal : cartelaDeCores.getColoracoesPessoais()) {
-            coloracoesPessoais.add(coloracaoPessoalRepository.findById(coloracaoPessoal.getIdColoracaoPessoal()).orElse(null));
-        }
-        cartelaDeCores.setColoracoesPessoais(coloracoesPessoais);
-
-        List<Produto> produtos = new ArrayList<>();
-        for (Produto produto : cartelaDeCores.getProdutos()) {
-            produtos.add(produtoRepository.findById(produto.getIdProduto()).orElse(null));
-        }
-        cartelaDeCores.setProdutos(produtos);
-
         return ResponseEntity
                 .created(cartelaDeCores.toModel().getRequiredLink("self").toUri())
                 .body(cartelaDeCores.toModel());
