@@ -1,21 +1,9 @@
 package com.projeto.idealcolors.controller;
 import lombok.RequiredArgsConstructor;
-import com.projeto.idealcolors.exception.RestNotFoundException;
-import com.projeto.idealcolors.model.Produto;
-//import com.projeto.idealcolors.repository.CartelaDeCoresRepository;
 import com.projeto.idealcolors.repository.ProdutoRepository;
-import io.swagger.annotations.ApiResponse;
-import io.swagger.annotations.ApiResponses;
-import io.swagger.v3.oas.annotations.Operation;
-import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.hateoas.EntityModel;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.server.ResponseStatusException;
-
 @RestController
 @Slf4j
 @RequestMapping("/idealcolors/api/produto")

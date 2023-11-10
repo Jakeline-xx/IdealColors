@@ -27,9 +27,9 @@ public class Produto {
     @Column(name = "id_produto")
     private Long idProduto;
 
-//    @ManyToOne
-//    @JoinColumn(name = "id_cartela_cores")
-//    private CartelaDeCores cartelaDeCores;
+    @ManyToOne
+    @JoinColumn(name = "id_cartela_cores")
+    private CartelaDeCores cartelaDeCores;
 
     @NotEmpty(message = "A descrição do produto é obrigatória")
     @Column(name = "descricao_produto")
