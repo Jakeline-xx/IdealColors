@@ -33,47 +33,47 @@ public class CartelaDeCoresController {
     ProdutoRepository produtoRepository;
 
 
-//    @GetMapping("{id}")
-//    public EntityModel<CartelaDeCores> show(@PathVariable Long id){
-//        log.info("buscando cartela de cores com id " + id);
-//        var cartelaDeCores = cartelaDeCoresRepository.findById(id)
-//                .orElseThrow(() -> new ResponseStatusException(HttpStatus.FORBIDDEN, "cartela de cores não encontrada"));
-//
-//        return cartelaDeCores.toModel();
-//
-//    }
-//
-//    @PostMapping
-//    public ResponseEntity<Object> create(@RequestBody @Valid CartelaDeCores cartelaDeCores){
-//        log.info("cadastrando cartela de cores: " + cartelaDeCores);
-//        cartelaDeCoresRepository.save(cartelaDeCores);
-//
-//        return ResponseEntity
-//                .created(cartelaDeCores.toModel().getRequiredLink("self").toUri())
-//                .body(cartelaDeCores.toModel());
-//    }
-//
-//    @DeleteMapping("{id}")
-//    public ResponseEntity<CartelaDeCores> destroy(@PathVariable Long id){
-//        log.info("apagando cartela de cores com id " + id);
-//        var cartelaDeCores = cartelaDeCoresRepository.findById(id)
-//                .orElseThrow(() -> new RestNotFoundException("cartela de cores não encontrada"));
-//
-//        cartelaDeCoresRepository.delete(cartelaDeCores);
-//
-//        return ResponseEntity.noContent().build();
-//
-//    }
-//
-//    @PutMapping("{id}")
-//    public EntityModel<CartelaDeCores> update(@PathVariable Long id, @RequestBody @Valid CartelaDeCores cartelaDeCores){
-//        log.info("alterando cartela de cores com id " + id);
-//        cartelaDeCoresRepository.findById(id)
-//                .orElseThrow(() -> new RestNotFoundException("cartela de cores não encontrada"));
-//
-//        cartelaDeCores.setIdCartelaDeCores(id);
-//        cartelaDeCoresRepository.save(cartelaDeCores);
-//
-//        return cartelaDeCores.toModel();
-//    }
+    @GetMapping("{id}")
+    public EntityModel<CartelaDeCores> show(@PathVariable Long id){
+        log.info("buscando cartela de cores com id " + id);
+        var cartelaDeCores = cartelaDeCoresRepository.findById(id)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.FORBIDDEN, "cartela de cores não encontrada"));
+
+        return cartelaDeCores.toModel();
+
+    }
+
+    @PostMapping
+    public ResponseEntity<Object> create(@RequestBody @Valid CartelaDeCores cartelaDeCores){
+        log.info("cadastrando cartela de cores: " + cartelaDeCores);
+        cartelaDeCoresRepository.save(cartelaDeCores);
+
+        return ResponseEntity
+                .created(cartelaDeCores.toModel().getRequiredLink("self").toUri())
+                .body(cartelaDeCores.toModel());
+    }
+
+    @DeleteMapping("{id}")
+    public ResponseEntity<CartelaDeCores> destroy(@PathVariable Long id){
+        log.info("apagando cartela de cores com id " + id);
+        var cartelaDeCores = cartelaDeCoresRepository.findById(id)
+                .orElseThrow(() -> new RestNotFoundException("cartela de cores não encontrada"));
+
+        cartelaDeCoresRepository.delete(cartelaDeCores);
+
+        return ResponseEntity.noContent().build();
+
+    }
+
+    @PutMapping("{id}")
+    public EntityModel<CartelaDeCores> update(@PathVariable Long id, @RequestBody @Valid CartelaDeCores cartelaDeCores){
+        log.info("alterando cartela de cores com id " + id);
+        cartelaDeCoresRepository.findById(id)
+                .orElseThrow(() -> new RestNotFoundException("cartela de cores não encontrada"));
+
+        cartelaDeCores.setIdCartelaDeCores(id);
+        cartelaDeCoresRepository.save(cartelaDeCores);
+
+        return cartelaDeCores.toModel();
+    }
 }

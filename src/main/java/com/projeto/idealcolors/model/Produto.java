@@ -11,7 +11,6 @@ import lombok.NoArgsConstructor;
 import org.springframework.hateoas.EntityModel;
 
 import java.time.LocalDateTime;
-
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
@@ -50,9 +49,8 @@ public class Produto {
     private Long qtdDisponivel;
 
     public EntityModel<Produto> toModel() {
-        return EntityModel.of(
-                this
-//                linkTo(methodOn(ProdutoController.class).show(idProduto)).withSelfRel()
+        return EntityModel.of(this,
+                                     linkTo(methodOn(ProdutoController.class).show(this.idProduto)).withSelfRel()
 //                linkTo(methodOn(ProdutoController.class).destroy(idProduto)).withRel("delete")
         );
     }
