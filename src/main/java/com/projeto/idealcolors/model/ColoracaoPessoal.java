@@ -47,9 +47,9 @@ public class ColoracaoPessoal {
 
     public EntityModel<ColoracaoPessoal> toModel() {
         return EntityModel.of(
-                this
-//                linkTo(methodOn(ColoracaoPessoalController.class).show(idColoracaoPessoal)).withSelfRel(),
-//                linkTo(methodOn(ColoracaoPessoalController.class).destroy(idColoracaoPessoal)).withRel("delete")
+                this,
+                linkTo(methodOn(ColoracaoPessoalController.class).show(idColoracaoPessoal)).withSelfRel(),
+                linkTo(methodOn(ColoracaoPessoalController.class).destroy(idColoracaoPessoal)).withRel("delete")
         );
     }
 }

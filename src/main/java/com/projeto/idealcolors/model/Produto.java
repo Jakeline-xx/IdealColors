@@ -50,8 +50,8 @@ public class Produto {
 
     public EntityModel<Produto> toModel() {
         return EntityModel.of(this,
-                                     linkTo(methodOn(ProdutoController.class).show(this.idProduto)).withSelfRel()
-//                linkTo(methodOn(ProdutoController.class).destroy(idProduto)).withRel("delete")
+                                     linkTo(methodOn(ProdutoController.class).show(this.idProduto)).withSelfRel(),
+                                     linkTo(methodOn(ProdutoController.class).destroy(idProduto)).withRel("delete")
         );
     }
 }

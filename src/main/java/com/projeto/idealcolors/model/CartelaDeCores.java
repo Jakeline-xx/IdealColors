@@ -39,9 +39,9 @@ public class CartelaDeCores {
 
     public EntityModel<CartelaDeCores> toModel() {
         return EntityModel.of(
-                this
-//                linkTo(methodOn(CartelaDeCoresController.class).show(idCartelaDeCores)).withSelfRel(),
-//                linkTo(methodOn(CartelaDeCoresController.class).destroy(idCartelaDeCores)).withRel("delete")
+                this,
+                linkTo(methodOn(CartelaDeCoresController.class).show(idCartelaDeCores)).withSelfRel(),
+                linkTo(methodOn(CartelaDeCoresController.class).destroy(idCartelaDeCores)).withRel("delete")
         );
     }
 }

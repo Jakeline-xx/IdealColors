@@ -1,6 +1,7 @@
 package com.projeto.idealcolors.controller;
 import com.projeto.idealcolors.exception.RestNotFoundException;
 import com.projeto.idealcolors.repository.CartelaDeCoresRepository;
+import io.swagger.v3.oas.annotations.Operation;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import com.projeto.idealcolors.repository.ProdutoRepository;
@@ -12,10 +13,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import  com.projeto.idealcolors.model.Produto;
 import org.springframework.web.server.ResponseStatusException;
-
-import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
-import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
-
+import org.springframework.validation.BindingResult;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 @RestController
 @Slf4j
 @RequestMapping("/idealcolors/api/produto")
@@ -39,33 +40,34 @@ public class ProdutoController {
     }
 
 
+    @Operation(summary = "Cadastrar um novo produto", description = "Este endpoint é usado para cadastrar um novo produto.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "201", description = "Produto criado com sucesso"),
+            @ApiResponse(responseCode = "400", description = "Erro de validação nos dados do produto"),
+            @ApiResponse(responseCode = "500", description = "Erro interno ao cadastrar o produto")
+    })
+    @PostMapping()
+    public ResponseEntity<Object> create(@RequestBody @Valid Produto produto, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            return ResponseEntity.badRequest().body("Erro de validação: " + bindingResult.getAllErrors());
+        }
 
-    @PostMapping
-    public ResponseEntity<Object> create(@RequestBody @Valid Produto produto){
         log.info("Cadastrando produto: " + produto);
-        produtoRepository.save(produto);
+
+        var produtoSalvo = produtoRepository.save(produto);
+        if (produtoSalvo == null || produtoSalvo.getIdProduto() == null) {
+            return ResponseEntity.status(500).body("Erro ao cadastrar o produto. Por favor, tente novamente.");
+        }
+
+        var idCartelaCor = produtoSalvo.getCartelaDeCores().getIdCartelaDeCores();
+        var cartelaCor = cartelaDeCoresRepository.findById(idCartelaCor);
+
+        produtoSalvo.setCartelaDeCores(cartelaCor.orElse(null));
 
         return ResponseEntity
-                .created(produto.toModel().getRequiredLink("self").toUri())
-                .body(produto.toModel());
-//        log.info("cadastrando produto: " + produto);
-//        produtoRepository.save(produto);
-//        produto.setCartelaDeCores(cartelaDeCoresRepository.findById(produto.getCartelaDeCores().getIdCartelaDeCores()).get());
-//        return ResponseEntity
-//                .created(produto.toModel().getRequiredLink("self").toUri())
-//                .body(produto.toModel());
-    }
-
-    @DeleteMapping("{id}")
-    public ResponseEntity<Produto> destroy(@PathVariable Long id){
-        log.info("apagando produto com id " + id);
-        var coloracaoPessoal = produtoRepository.findById(id)
-                .orElseThrow(() -> new RestNotFoundException("produto não encontrado"));
-
-        produtoRepository.delete(coloracaoPessoal);
-
-        return ResponseEntity.noContent().build();
-
+                .created(ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
+                        .buildAndExpand(produtoSalvo.getIdProduto()).toUri())
+                .body(produtoSalvo.toModel());
     }
 
     @PutMapping("{id}")
@@ -78,6 +80,17 @@ public class ProdutoController {
         produtoRepository.save(produto);
 
         return produto.toModel();
+    }
+    @DeleteMapping("{id}")
+    public ResponseEntity<Produto> destroy(@PathVariable Long id){
+        log.info("apagando produto com id " + id);
+        var coloracaoPessoal = produtoRepository.findById(id)
+                .orElseThrow(() -> new RestNotFoundException("produto não encontrado"));
+
+        produtoRepository.delete(coloracaoPessoal);
+
+        return ResponseEntity.noContent().build();
+
     }
 }
 
