@@ -27,12 +27,6 @@ public class CartelaDeCores {
     @Column(name = "id_cartela_cores")
     private Long idCartelaDeCores;
 
-    @OneToMany(mappedBy = "cartelaDeCores")
-    private List<ColoracaoPessoal> coloracoesPessoais;
-
-    @OneToMany(mappedBy = "cartelaDeCores")
-    private List<Produto> produtos;
-
     @NotEmpty(message = "A lista de cores da cartela é obrigatória")
     @Column(name = "cores_cartela")
     private String coresCartela;
